@@ -1,4 +1,3 @@
 [submodule "lm-evaluation-harness"]
 	path = lm-evaluation-harness
-	url = https://github.com/EleutherAI/lm-evaluation-harness/tree/0126f6d15e6d5f9b93f244b8ece5a44bdbac9c2c/lm_eval/tasks/afrobench
-
+	url = https://github.com/JessicaOjo/lm-evaluation-harness.git
