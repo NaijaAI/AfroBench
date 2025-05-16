@@ -23,3 +23,21 @@ All scripts, prompts and datasets are opensource and available. We have 2 run op
 * We’ll review and integrate them into the official leaderboard
 
 Join us in building more equitable and representative NLP benchmarks! We look forward to your contributions 🎉.
+
+All dataset used in this benchmark are available at [huggingface](https://huggingface.co/collections/masakhane/afrobench-67dbf553ebf5701c2207f883)
+
+### Citation
+
+```
+@misc{ojo2025afrobenchgoodlargelanguage,
+      title={AfroBench: How Good are Large Language Models on African Languages?},
+      author={Jessica Ojo and Odunayo Ogundepo and Akintunde Oladipo and Kelechi Ogueji and Jimmy Lin and Pontus Stenetorp and David Ifeoluwa Adelani},
+      year={2025},
+      eprint={2311.07978},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2311.07978},
+}
+```
+
+Please cite datasets used. [Datasets Details](https://mcgill-nlp.github.io/AfroBench/tasks.html)
