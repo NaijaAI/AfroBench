@@ -77,7 +77,7 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
     afrobench_tasks = [task.lower() for task in afrobench_tasks]
     afrobench_lite_datasets = ["injongointent", "sib", "afrixnli", "belebele", "afrimmlu", "afrimgsm",
                                "flores - en_xx"]
-    afrobench_lite_languages = ["amh", "hau", "ibo", "kin", "lin", "lug", "orm", "sna", "sot", "swa", "xho", "yor", "zul"]
+    afrobench_lite_languages = ["amh", "hau", "ibo", "kin", "lin", "lug", "orm", "sna", "sot", "swa", "xho", "yor", "zul", "wol"]
 
     # Process each CSV file
     for filename in os.listdir(data_dir):
@@ -150,22 +150,20 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
                     dataset_scores = {}
                     for model in models:
                         best_avg_row = df[df["model"] == model].loc[df[df["model"] == model][avg_col].idxmax()]
-                        # scores = [best_avg_row[col] for col in afrobench_lite_languages if col in best_avg_row]
+
                         scores = [best_avg_row[[c for c in best_avg_row.index if c.split('_')[0] == lang][0]] for lang
                                   in afrobench_lite_languages if
                                   any(c.split('_')[0] == lang for c in best_avg_row.index)]
 
                         dataset_scores[model] = round(sum(scores) / len(scores) if scores else None,
                                                           1)  # Avoid division by zero
-                        # except TypeError:
-                        #     print(best_avg_row)
 
                     df = pd.read_csv('../results/New Results - June2025.csv')
                     df = df[df['task'] == dataset_name]
                     models = df["model"].unique()
                     for model in models:
                         scores = [df.loc[df["model"] == model, col].values[0] for col in afrobench_lite_languages
-                                  if not df.loc[df["model"] == model, col].empty]
+                                  if col in df.columns]
                         dataset_scores[model] = round(sum(scores) / len(scores) if scores else None, 1)
                     leaderboard_data[subtask][dataset_name] = dataset_scores
 
@@ -205,4 +203,4 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
         print("Task-wise JSON files with subtasks generated successfully!")
 
 
-generate_json_files(leaderboard="afrobench")
+generate_json_files(leaderboard="afrobench_lite")
