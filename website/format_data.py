@@ -70,10 +70,11 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
     # Afrobench-Lite included datasets
     afrobench_lite_datasets = {"injongointent", "sib", "afrixnli", "belebele", "afrimmlu", "afrimgsm",
                                "flores - en_xx", "flores - xx_en"}
+    afrobench_lite_languages = ["amh", "hau", "ibo", "kin", "lin", "lug", "orm", "sna", "sot", "swa", "xho", "yor", "zul"]
 
     # Process each CSV file
     for filename in os.listdir(data_dir):
-        if filename.endswith(".csv"):
+        if filename.endswith(".csv") and '- June2025.csv' not in filename:
             file_path = os.path.join(data_dir, filename)
             dataset_name = filename.replace(" - 0-shot.csv", "").replace(" 0-shot.csv", "")
 
@@ -123,7 +124,7 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
                 for model in models:
                     best_avg_row = df[df["model"] == model].loc[df[df["model"] == model][avg_col].idxmax()]
                     scores = [best_avg_row[col] for col in language_columns if col in best_avg_row]
-                    dataset_scores[model] = round(sum(scores) / len(scores) if scores else None, 1)  # Avoid division by zero
+                    dataset_scores[model] = round(sum(scores) / len(scores) if scores else None, 1)
 
                 leaderboard_data[task][subtask]["datasets"][dataset_name] = dataset_scores
 
@@ -138,7 +139,7 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
                     dataset_scores = {}
                     for model in models:
                         best_avg_row = df[df["model"] == model].loc[df[df["model"] == model][avg_col].idxmax()]
-                        scores = [best_avg_row[col] for col in language_columns if col in best_avg_row]
+                        scores = [best_avg_row[col] for col in afrobench_lite_languages if col in best_avg_row]
                         dataset_scores[model] = round(sum(scores) / len(scores) if scores else None,
                                                       1)  # Avoid division by zero
 
@@ -162,6 +163,37 @@ def generate_json_files(data_dir="../results", output_dir="leaderboard_json", le
                     best_avg_row = df[df["model"] == model].loc[df[df["model"] == model][avg_col].idxmax()]
                     model_scores = [round(score, 1) for score in best_avg_row[language_columns].to_list()]
                     task_data[task]["subtasks"][subtask]["datasets"][dataset_name]["scores"][model] = model_scores
+
+        elif filename.endswith(".csv") and '- June2025.csv' in filename:
+            if leaderboard == "afrobench_lite":
+                df = pd.read_csv(filename)
+                dataset_names = df['task'].unique()
+                models = df['Model'].unique()
+                all_columns = list(df.columns)
+                meta_columns = ["model", "prompt", "avg_score", "avg"]
+                language_columns = [col for col in all_columns if col not in meta_columns]
+                language_columns = [col for col in language_columns if col.lower() not in {"eng", "fra",
+                                                                                           "eng_latn, fra_latn"}]
+                for dataset_name in dataset_names:
+                    # Identify task & subtask
+                    task_info = task_map.get(dataset_name.lower())
+                    if not task_info:
+                        print(f"Skipping unmapped dataset: {dataset_name.lower()}")
+                        continue
+
+                    task, subtask = task_info
+                    if dataset_name in afrobench_lite_datasets:
+                        # Use subtask name as task key (no nested "subtasks" structure)
+                        if subtask not in leaderboard_data:
+                            leaderboard_data[subtask] = {}
+                    dataset_scores = {}
+                    for model in models:
+                        best_avg_row = df[(df["model"] == model) & (df["task"] == dataset_name)]
+                        scores = [best_avg_row[col] for col in language_columns if col in best_avg_row]
+                        dataset_scores[model] = round(sum(scores) / len(scores) if scores else None,
+                                                      1)  # Avoid division by zero
+
+                    leaderboard_data[subtask][dataset_name] = dataset_scores
 
     # Save leaderboard JSON if enabled
     if leaderboard:
