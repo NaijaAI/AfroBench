@@ -90,7 +90,7 @@
                             <th class="border p-2">MMLU</th>
                             <th class="border p-2">MATH</th>
                             <th class="border p-2">MT<br>(en/fr-xx)</th>
-                            <th class="border p-2">MT<br>(xx-en/fr)</th>
+<!--                            <th class="border p-2">MT<br>(xx-en/fr)</th>-->
                         </tr>
                     </thead>
                     <tbody id="afrobench_lite-table">
@@ -188,7 +188,7 @@
             if (currentView === "afrobench") {
                 columns = ["POS", "NER", "Senti", "Topic", "Intent", "Hate", "NLI", "XQA", "Arc-E", "RC", "MMLU", "Math", "MT(en/fr-xx)", "MT(xx-en/fr)", "SUMM", "ADR"];
             } else { // afrobench-lite
-                columns = ["Intent", "Topic", "NLI", "RC", "MMLU", "Math", "MT(en/fr-xx)", "MT(xx-en/fr)"];
+                columns = ["Intent", "Topic", "NLI", "RC", "MMLU", "Math", "MT(en/fr-xx)"];
             }
             
             computedScores.forEach((entry, index) => {
