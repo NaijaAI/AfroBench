@@ -14,7 +14,6 @@ source /home/mila/j/jessica.ojo/scratch/miniconda3/etc/profile.d/conda.sh
 
 # Activate the environment
 conda activate custom
-export GEMINI_API_KEY="AIzaSyDQh9RyL-0JGUy6Fh7Rr_uuQL0UW-4orLc"
 export HF_HOME='~/scratch/.cache/huggingface'
 export HF_DATASETS_CACHE='~/scratch/.cache/huggingface'
 export TOKENIZERS_PARALLELISM=false
