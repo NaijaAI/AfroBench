@@ -25,11 +25,11 @@ test_split: test
 fewshot_split: validation
 target: answer_number
 prompts:
-  - "{{question}} \nStep-by-step Answer: "
-  - "Give direct numerical answers for the question provided.\n\nQuestion: {{question}} \nStep-by-step Answer: "
-  - "Solve the following math question \n\nQuestion: {{question}} \nStep-by-step Answer: "
-  - "Answer the given question with the appropriate numerical value, ensuring that the response is clear and without any supplementary information. \n\nQuestion: {{question}} \nStep-by-step Answer: "
-  - "For mathematical questions provided in {{language}} language. Supply the accurate numeric step by step answer to the provided question. \n\nQuestion: {{question}} \nStep-by-step Answer: "
+  - "<prompt> {{question}} \nStep-by-step Answer <response> <reason>: "
+  - "<prompt> Give direct numerical answers for the question provided.\n\nQuestion: {{question}} \nStep-by-step Answer: <response> <reason>: "
+  - "<prompt> Solve the following math question \n\nQuestion: {{question}} \nStep-by-step Answer <response> <reason>: "
+  - "<prompt> Answer the given question with the appropriate numerical value, ensuring that the response is clear and without any supplementary information. \n\nQuestion: {{question}} \nStep-by-step Answer <response> <reason>: "
+  - "<prompt> For mathematical questions provided in {{language}} language. Supply the accurate numeric step by step answer to the provided question. \n\nQuestion: {{question}} \nStep-by-step Answer <response> <reason>: "
 metrics:
   - exact_match
 filters:

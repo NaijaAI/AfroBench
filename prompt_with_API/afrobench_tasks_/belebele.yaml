@@ -38,11 +38,10 @@ languages:
 test_split: test
 target: correct_answer_num
 prompts:
-  - "P: {{flores_passage}}\nQ: {{question}}\nA: {{mc_answer1}}\nB: {{mc_answer2}}\nC: {{mc_answer3}}\nD: {{mc_answer4}}\nPlease choose the correct answer from the options above:"
-  - "Passage: {{flores_passage}}\nQuestion: {{question}}\n1: {{mc_answer1}}\n2: {{mc_answer2}}\n3: {{mc_answer3}}\n4: {{mc_answer4}}\nPlease select the correct answer from the given choices:"
-  - "Context: {{flores_passage}}\nQuery: {{question}}\nOption A: {{mc_answer1}}\nOption B: {{mc_answer2}}\nOption C: {{mc_answer3}}\nOption D: {{mc_answer4}}\nPlease indicate the correct option from the list above:"
-  - "{{flores_passage}}\nBased on the above passage, answer the following question:\n{{question}}\nChoices:\nA) {{mc_answer1}}\nB) {{mc_answer2}}\nC) {{mc_answer3}}\nD) {{mc_answer4}}\nPlease provide the correct answer from the choices given:"
-  - "Read the passage: {{flores_passage}}\nThen answer the question: {{question}}\nOptions:\nA. {{mc_answer1}}\nB. {{mc_answer2}}\nC. {{mc_answer3}}\nD. {{mc_answer4}}\nPlease choose the correct option from the above list:"
+  - "<qa> <context> {{flores_passage}} </context> \nQ: {{question}}\nA: {{mc_answer1}}\nB: {{mc_answer2}}\nC: {{mc_answer3}}\nD: {{mc_answer4}}\n <answer>:"
+  - "<qa> \nQuestion: {{question}}\n1: {{mc_answer1}}\n2: {{mc_answer2}}\n3: {{mc_answer3}}\n4: {{mc_answer4}}\n <context> {{flores_passage}} </context> <answer>: "
+  - "<prompt> Context: {{flores_passage}}\nQuery: {{question}}\nOption A: {{mc_answer1}}\nOption B: {{mc_answer2}}\nOption C: {{mc_answer3}}\nOption D: {{mc_answer4}}\n <response>:"
+  - "<prompt> Read the passage: {{flores_passage}}\nThen answer the question: {{question}}\nOptions:\nA. {{mc_answer1}}\nB. {{mc_answer2}}\nC. {{mc_answer3}}\nD. {{mc_answer4}}\nPlease choose the correct option from the above list <response>:"
 choices:
   - A
   - B

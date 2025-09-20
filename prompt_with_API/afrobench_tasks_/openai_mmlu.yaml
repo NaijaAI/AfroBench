@@ -8,11 +8,9 @@ languages:
 test_split: test
 target: Answer
 prompts:
-  - "Q: {{Question}}\nA: {{A}}\nB: {{B}}\nC: {{C}}\nD: {{D}}\nPlease choose the correct answer from the options above:"
-  - "Question: {{Question}}\n1: {{A}}\n2: {{B}}\n3: {{C}}\n4: {{D}}\nPlease select the correct answer from the given choices:"
-  - "Input Question: {{Question}}\nOption A: {{A}}\nOption B: {{B}}\nOption C: {{C}}\nOption D: {{D}}\nPlease indicate the correct option from the list above:"
-  - "Critically analyze the question and select the most probable answer from the list:\n{{Question}}\nChoices:\nA) {{A}}\nB) {{B}}\nC) {{C}}\nD) {{D}}"
-  - "Answer the question and pick the correct answer from the options: {{Question}}\nOptions:\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\nPlease choose the correct option from the above list:"
+  - "<qa> {{Question}}\nA: {{A}}\nB: {{B}}\nC: {{C}}\nD: {{D}}\n <answer>: "
+  - "<prompt> Critically analyze the question and select the most probable answer from the list:\n{{Question}}\nChoices:\nA) {{A}}\nB) {{B}}\nC) {{C}}\nD) {{D}} <response>: "
+  - "<prompt> Answer the question and pick the correct answer from the options: {{Question}}\nOptions:\nA. {{A}}\nB. {{B}}\nC. {{C}}\nD. {{D}}\nPlease choose the correct option from the above list <response>:"
 choices:
   - A
   - B

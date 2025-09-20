@@ -124,9 +124,8 @@ languages:
 test_split: devtest
 target_prefix: sentence
 prompts:
-  - "{{source}} sentence: {{source_column}} \n{{target}} sentence: . Return only the translated sentence."
-  - "You are a translation expert. Translate the following {{source}} sentences to {{target}} \n{{source}} sentence: {{source_column}}\n{{target}} sentence: . Return only the translated sentence."
-  - "As a {{source}} and {{target}}, translate the following {{source}} sentences to {{target}}. \n{{source}} sentence: {{source_column}}\n{{target}} sentence: . Return only the translated sentence."
+  - "<classify> sentence {{target}}: "
+  - "<prompt> Translate this text to {{target}} \n sentence: {{source_column}}\n{{target}}: "
 metrics:
   - chrf
   - bleu

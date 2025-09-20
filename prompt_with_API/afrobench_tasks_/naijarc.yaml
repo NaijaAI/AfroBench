@@ -8,11 +8,10 @@ languages:
 test_split: test
 target: Answer
 prompts:
-  - "P: {{story}}\nQ: {{question}}\nA: {{options_A}}\nB: {{options_B}}\nC: {{options_C}}\nD: {{options_D}}\nPlease choose the correct answer from the options above:"
-  - "Passage: {{story}}\nQuestion: {{question}}\n1: {{options_A}}\n2: {{options_B}}\n3: {{options_C}}\n4: {{options_D}}\nPlease select the correct answer from the given choices:"
-  - "Context: {{story}}\nQuery: {{question}}\nOption A: {{options_A}}\nOption B: {{options_B}}\nOption C: {{options_C}}\nOption D: {{options_D}}\nPlease indicate the correct option from the list above:"
-  - "{{story}}\nBased on the above passage, answer the following question:\n{{question}}\nChoices:\nA) {{options_A}}\nB) {{options_B}}\nC) {{options_C}}\nD) {{options_D}}\nPlease provide the correct answer from the choices given:"
-  - "Read the passage: {{story}}\nThen answer the question: {{question}}\nOptions:\nA. {{options_A}}\nB. {{options_B}}\nC. {{options_C}}\nD. {{options_D}}\nPlease choose the correct option from the above list:"
+  - "<qa> <context> {{story}} </context> \nQuestion: {{question}}\n1: {{options_A}}\n2: {{options_B}}\n3: {{options_C}}\n4: {{options_D}}\n <answer>: "
+  - "<qa> Context: {{story}}\nQuery: {{question}}\nOption A: {{options_A}}\nOption B: {{options_B}}\nOption C: {{options_C}}\nOption D: {{options_D}}\n <answer>:"
+  - "<prompt> {{story}}\nBased on the above passage, answer the following question:\n{{question}}\nChoices:\nA) {{options_A}}\nB) {{options_B}}\nC) {{options_C}}\nD) {{options_D}}\nPlease provide the correct answer from the choices given <respones>: "
+  - "<qa> <context> {{story}}\n </context> {{question}}\nOptions:\nA. {{options_A}}\nB. {{options_B}}\nC. {{options_C}}\nD. {{options_D}}\n <answer>: "
 choices: ["A", "B", "C", "D"]
 verbalizer:
   "A": ['a:', 'a', 'a.', '1', '1:', 'a)', '(a)', 'option a', 'option a:', 'option_a:']
